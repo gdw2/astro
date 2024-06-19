@@ -12,7 +12,7 @@
 -- before using this configuration
 -- ------------------------------------------
 
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- Local variables
 -- Language filetypes for plugins
@@ -151,6 +151,7 @@ return {
   -- REPL workflow with Conjure
   {
     "Olical/conjure",
+    branch = "develop",
     -- load plugin on filetypes
     filetype = lisp_dialects,
     dependencies = {

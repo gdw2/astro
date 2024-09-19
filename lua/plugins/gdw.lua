@@ -45,6 +45,8 @@ return {
   { import = "astrocommunity.terminal-integration.toggleterm-manager-nvim" },
   { import = "astrocommunity.completion.copilot-cmp" },
   { import = "astrocommunity.pack.python" },
+  { import = "astrocommunity.pack.cpp" },
+  { import = "astrocommunity.motion.leap-nvim" },
   -- {
   --   "jay-babu/project.nvim",
   --   opts = {
@@ -122,5 +124,31 @@ return {
       -- See Configuration section for rest
     },
     --         -- See Commands section for default commands if you want to lazy load on them
+  },
+  {
+    "AstroNvim/astrocore",
+    opts = function(_, opts)
+      local maps = opts.mappings
+      local astro = require "astrocore"
+      maps.n["<Leader>tc"] = { "<cmd>ToggleTermSendCurrentLine<cr>", desc = "Send Current Line" }
+      maps.v["<Leader>tC"] = { "<cmd>ToggleTermSendVisualLines<cr>", desc = "Send Visual Lines" }
+
+      -- gh-dash support
+      if vim.fn.executable "git" == 1 and vim.fn.executable "gh-dash" == 1 then
+        maps.n["<Leader>g"] = vim.tbl_get(opts, "_map_sections", "g")
+        local gh_dash = {
+          callback = function()
+            -- local worktree = astro.file_worktree()
+            -- local flags = worktree and (" --work-tree=%s --git-dir=%s"):format(worktree.toplevel, worktree.gitdir)
+            --   or ""
+            -- astro.toggle_term_cmd { cmd = "gh-dash " .. flags, direction = "float" }
+            astro.toggle_term_cmd { cmd = "GH_HOST=git.viasat.com gh-dash ", direction = "float" }
+          end,
+          desc = "ToggleTerm gh-dash",
+        }
+        maps.n["<Leader>g-"] = { gh_dash.callback, desc = gh_dash.desc }
+        -- maps.n["<Leader>tl"] = { gh_dash.callback, desc = gh_dash.desc }
+      end
+    end,
   },
 }

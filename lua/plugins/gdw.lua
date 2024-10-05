@@ -152,4 +152,29 @@ return {
       end
     end,
   },
+  {
+    "akinsho/toggleterm.nvim",
+    cmd = { "ToggleTerm", "TermExec" },
+    specs = {
+      {
+        "AstroNvim/astrocore",
+        opts = function(_, opts)
+          local maps = opts.mappings
+          local astro = require "astrocore"
+          -- <C-'>, for some reason, doesn't work in tmux or screen
+          -- so, change it to <C-\\>
+          maps.n["<C-\\>"] = { '<Cmd>execute v:count . "ToggleTerm"<CR>', desc = "Toggle terminal" } -- requires terminal that supports binding <C-'>
+          maps.t["<C-\\>"] = { "<Cmd>ToggleTerm<CR>", desc = "Toggle terminal" } -- requires terminal that supports binding <C-'>
+          maps.i["<C-\\>"] = { "<Esc><Cmd>ToggleTerm<CR>", desc = "Toggle terminal" } -- requires terminal that supports binding <C-'>
+
+          if vim.fn.executable "lazydocker" == 1 then
+            maps.n["<Leader>td"] = {
+              function() astro.toggle_term_cmd { cmd = "lazydocker", direction = "float" } end,
+              desc = "ToggleTerm lazydocker",
+            }
+          end
+        end,
+      },
+    },
+  },
 }

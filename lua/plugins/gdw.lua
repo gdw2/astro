@@ -47,6 +47,7 @@ return {
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.motion.leap-nvim" },
+  { import = "astrocommunity.editing-support.nvim-treesitter-context" },
   -- {
   --   "jay-babu/project.nvim",
   --   opts = {

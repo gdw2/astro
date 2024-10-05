@@ -132,7 +132,7 @@ return {
       local maps = opts.mappings
       local astro = require "astrocore"
       maps.n["<Leader>tc"] = { "<cmd>ToggleTermSendCurrentLine<cr>", desc = "Send Current Line" }
-      maps.v["<Leader>tC"] = { "<cmd>ToggleTermSendVisualLines<cr>", desc = "Send Visual Lines" }
+      maps.v["<Leader>tc"] = { "<cmd>ToggleTermSendVisualLines<cr>", desc = "Send Visual Lines" }
 
       -- gh-dash support
       if vim.fn.executable "git" == 1 and vim.fn.executable "gh-dash" == 1 then

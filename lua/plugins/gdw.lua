@@ -136,6 +136,29 @@ return {
       maps.i["<C-CR>"] = { "<cmd>ToggleTermSendCurrentLine<cr>", desc = "Send Current Line" }
       maps.i["<C-s>"] = { "<cmd>ToggleTermSendCurrentLine<cr>", desc = "Send Current Line" }
 
+      -- I have to do this, or I get a stack trace. The `args` in the original is sometimes unset.
+      -- Original is here: https://github.com/AstroNvim/AstroNvim/blob/e3434ed8ba30af34b36d270b0197b91e444b9363/lua/astronvim/plugins/telescope.lua#L71-L77
+      if vim.fn.executable "rg" == 1 then
+        maps.n["<Leader>fW"] = {
+          function()
+            require("telescope.builtin").live_grep {
+              additional_args = { "--hidden", "--no-ignore" },
+            }
+          end,
+          desc = "Find words in all files",
+        }
+        -- changing this from the default by adding --hidden so that it will
+        -- search for files in the .ghithub dir.
+        maps.n["<Leader>fw"] = {
+          function()
+            require("telescope.builtin").live_grep {
+              additional_args = { "--hidden" },
+            }
+          end,
+          desc = "Find words in all files",
+        }
+      end
+
       -- gh-dash support
       if vim.fn.executable "git" == 1 and vim.fn.executable "gh-dash" == 1 then
         maps.n["<Leader>g"] = vim.tbl_get(opts, "_map_sections", "g")
@@ -190,6 +213,18 @@ return {
             "cpp",
             "c",
           },
+        },
+      },
+    },
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,
+          hide_gitignored = true,
+          always_show = { ".github" },
         },
       },
     },

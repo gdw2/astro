@@ -118,8 +118,6 @@ tags:
   - clojure
 ---
 
-**Thoughts for the week**
-
 $0
 
 <!-- more -->
@@ -147,6 +145,16 @@ Thank you.
     "description": "MkDocs Key form"
   },
   "mkdocs code block embeded": {
+    "prefix": "mkdocs-code-embed",
+    "body": [
+      "!!! EXAMPLE \"${1:title}\"
+    ```${2:title}
+    --8<-- \"${2:url}?raw=true\"
+    ```"
+    ]
+
+  },
+  "mkdocs code block fourclojure": {
     "prefix": "mkdocs-code-embed-4clojure",
     "body": [
       "!!! EXAMPLE \"Design Journal - 4Clojure #${1:number}\"
@@ -154,6 +162,5 @@ Thank you.
     --8<-- \"https://github.com/practicalli/four-clojure/blob/master/src/four_clojure/${2:filename}?raw=true\"
     ```"
     ]
-
   }
 }

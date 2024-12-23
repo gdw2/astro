@@ -1,15 +1,21 @@
 # Unreleased
 
+# 2024-12-17 Local install of Clojure LSP
+
 ## Added
 - snippets: markdown embedded code example - 4clojure
 - community: json pack to format api responses, etc.
 - practicalli: conjure lsp and treesitter log configs
 - community: gitlinker-nvim open git files & lines in GitHub/GitLab
+- snippet: mkdocs embed external code link for markdown
+- practicalli: example transparent background for everforest theme
 
 ## Changed
 - practicalli: disable neovim providers for node, perl, python, ruby
 - snippets: fixed placeholder syntax without labels
 - practicalli: kitty style graph for neogit
+- update: changes from astronvim/template
+- lsp: use local clojure lsp server and prevent mason install
 
 
 # 2024-08-24 Refactor Clojure Which-key mappings

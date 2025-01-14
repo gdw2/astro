@@ -43,13 +43,32 @@ return {
   { import = "astrocommunity.recipes.neovide" },
   { import = "astrocommunity.git.gitlinker-nvim" },
   { import = "astrocommunity.terminal-integration.toggleterm-manager-nvim" },
-  { import = "astrocommunity.completion.copilot-cmp" },
   { import = "astrocommunity.editing-support.copilotchat-nvim" },
+  { import = "astrocommunity.completion.copilot-cmp" },
+  { import = "astrocommunity.completion.avante-nvim" },
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.motion.leap-nvim" },
   { import = "astrocommunity.motion.marks-nvim" },
   { import = "astrocommunity.editing-support.nvim-treesitter-context" },
+  { import = "astrocommunity.code-runner.overseer-nvim" },
+  {
+    "yetone/avante.nvim",
+    opts = {
+      provider = "copilot",
+      -- add any opts here
+    },
+  },
+  -- nvim-notify controls how messages are displayed
+  {
+    "rcarriga/nvim-notify",
+    opts = {
+      -- top_down = false,
+      timeout = 2000, -- shorter display duration, default 3000
+      level = vim.log.levels.INFO,
+      -- background_color = "#000000",
+    },
+  },
   -- {
   --   "jay-babu/project.nvim",
   --   opts = {
@@ -93,6 +112,7 @@ return {
       maps.v["<Leader>tc"] = { "<cmd>ToggleTermSendVisualLines<cr>", desc = "Send Visual Lines" }
       maps.i["<C-CR>"] = { "<cmd>ToggleTermSendCurrentLine<cr>", desc = "Send Current Line" }
       maps.i["<C-s>"] = { "<cmd>ToggleTermSendCurrentLine<cr>", desc = "Send Current Line" }
+      maps.n["<Leader>Mv"] = { "<cmd>OverseerRun Restart\\ viabox<cr>", desc = "Restart viabox" }
 
       -- I have to do this, or I get a stack trace. The `args` in the original is sometimes unset.
       -- Original is here: https://github.com/AstroNvim/AstroNvim/blob/e3434ed8ba30af34b36d270b0197b91e444b9363/lua/astronvim/plugins/telescope.lua#L71-L77
@@ -149,6 +169,7 @@ return {
           maps.n["<C-\\>"] = { '<Cmd>execute v:count . "ToggleTerm"<CR>', desc = "Toggle terminal" } -- requires terminal that supports binding <C-'>
           maps.t["<C-\\>"] = { "<Cmd>ToggleTerm<CR>", desc = "Toggle terminal" } -- requires terminal that supports binding <C-'>
           maps.i["<C-\\>"] = { "<Esc><Cmd>ToggleTerm<CR>", desc = "Toggle terminal" } -- requires terminal that supports binding <C-'>
+          maps.t["jk"] = { "<C-\\><C-n>", desc = "Escape terminal" }
 
           if vim.fn.executable "lazydocker" == 1 then
             maps.n["<Leader>td"] = {
